@@ -27,8 +27,7 @@
 
   <script>
     import * as Consts from '../models/consts.js';
-    import * as ServicesInfo from '../models/ServicesInfo.js';
-    import * as DBRequests from '../scripts/DBrequests.js';
+    
     export default {
 
         props: { // variáveis do componente
@@ -67,6 +66,12 @@
 
                 const currentTime = new Date();
                 const diffMinutes = Math.floor((dataFim - currentTime) / 60000);
+
+                if (diffMinutes < 0) {
+                    const mesFim = dataFim.getMonth().toString().padStart(2,"0");
+                    const diaFim = dataFim.getDate().toString().padStart(2,"0");
+                    this.horaFim = this.horaFim + " DE " + diaFim + "/" + mesFim
+                }
                 this.poucoTempo = diffMinutes < 60;
             },
 

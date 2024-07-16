@@ -304,7 +304,7 @@
         "dia": 17,
         "mes": 5,
         "ano": 2024,
-        "hora": 23,
+        "hora": 17,
         "minutos": 55
       },
       "descrição": "Falta o filtro.",
@@ -340,11 +340,11 @@
       "estado": "programado",
       "agendamento": "programado",
       "data": {
-        "dia": 5,
-        "mes": 5,
+        "dia": 17,
+        "mes": 7,
         "ano": 2024,
-        "hora": 23,
-        "minutos": 55
+        "hora": 20,
+        "minutos": 35
       },
       "descrição": "Precisa de um filtro novo.",
       "notas-concluido": ""

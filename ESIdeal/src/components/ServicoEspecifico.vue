@@ -308,11 +308,10 @@
                 }
             },
             poucoTempo() {
-                const serviceTime = new Date(this.servico.data).getTime();
+                const serviceTime = this.servico.data
                 const currentTime = Date.now();
-                const oneHour = 3600000; // 1 hour in milliseconds
-                const isNear = Math.abs(currentTime - serviceTime) <= oneHour;
-                return isNear;
+                const diffMinutes = Math.floor((serviceTime - currentTime) / 60000);
+                return diffMinutes < 60;
             },
         },
 
@@ -486,7 +485,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 0px 50px 0px 50px;
+        margin: 0 2.4vw
     }
 
     .title{
@@ -572,8 +571,9 @@
     .details {
         display: flex;
         flex-direction: row;
-        padding: 20px 30px;
+        padding: 20px 0px;
         align-items: stretch;
+        margin: 0 2.4vw
     }
 
     .car-details, .client-info {
@@ -790,7 +790,7 @@
 
     .status-message {
         font-size: 1.25em;
-        margin-left: 70px;
+        margin-left: 2.4vw;
     }
 
     hr {

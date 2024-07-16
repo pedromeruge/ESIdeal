@@ -146,7 +146,7 @@ export const serviceState = defineStore('dbData', {
 
         async getServiceBaseInfo(idService) {
             try {
-                const service = this.servicesWithBaseData[idService]
+                let service = this.servicesWithBaseData[idService]
                 if (!service) {
                     service = await DBRequests.fetchServiceById(idService);
                     service = fillServiceData(service)
