@@ -1,17 +1,20 @@
 # Como utilizar:
 
-- Num terminal iniciar o Json-Server: 
-cd backend
-json-server --watch db.json
+Num terminal iniciar o Json-Server: 
 
-- Noutro terminal iniciar o frontend:
-cd ESIdeal
-npm i
-npm run
+    cd backend
+    json-server --watch db.json
+
+Noutro terminal iniciar o frontend:
+
+    cd ESIdeal
+    npm i
+    npm run
 
 # Login para o site:
-user: user
-pass: 123
+    
+    username: user
+    password: 123
 
 # Powerpoint com descrição do projeto/ Mockups:
 [Powerpoint](docs/Apresentação%20IPM.pptx)
