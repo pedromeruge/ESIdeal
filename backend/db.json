@@ -354,7 +354,14 @@
       "vehicleId": "AH-32-44",
       "service-definitionId": "cr",
       "estado": "programado",
-      "agendamento": "filaDeEspera",
+      "agendamento": "programado",
+      "data": {
+        "dia": 18,
+        "mes": 7,
+        "ano": 2024,
+        "hora": 15,
+        "minutos": 35
+      },
       "descrição": "Atenção rodas traseiras."
     },
     {

@@ -27,7 +27,7 @@
 
   <script>
     import * as Consts from '../models/consts.js';
-    
+
     export default {
 
         props: { // variáveis do componente
@@ -60,18 +60,21 @@
 
         methods: {
             calculateTime(dataFim) {
+                var monthNames = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho", "Julho", "Agosto", "Setembro", "Outubro","Novembro","Dezembro"]
                 const horaFim = dataFim.getHours().toString().padStart(2, '0');
                 const minutosFim = dataFim.getMinutes().toString().padStart(2, '0');
                 this.horaFim = `${horaFim}:${minutosFim}h`;
 
                 const currentTime = new Date();
                 const diffMinutes = Math.floor((dataFim - currentTime) / 60000);
+                const diffDays = Math.floor(diffMinutes / (60 * 24))
 
-                if (diffMinutes < 0) {
-                    const mesFim = dataFim.getMonth().toString().padStart(2,"0");
+                if (diffMinutes < 0 || diffDays > 0) {
                     const diaFim = dataFim.getDate().toString().padStart(2,"0");
-                    this.horaFim = this.horaFim + " DE " + diaFim + "/" + mesFim
+                    const mesFim = monthNames[dataFim.getMonth()]
+                    this.horaFim = this.horaFim + " (" + diaFim + " " + mesFim + ")"
                 }
+
                 this.poucoTempo = diffMinutes < 60;
             },
 

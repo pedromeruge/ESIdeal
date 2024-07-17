@@ -82,11 +82,10 @@ export default {
     return {
 
       dropdownOrdenarOptions: [ // títulos e funções a chamar para cada botão
+        { "title": "Proximidade da data limite", "function": "sortByProxLimit", "optional": true}, // não é para aparecer na tabela de "sem prazo limite"
         { "title": "Ordem de chegada", "function": "sortArrival"},
         { "title": "Ordem crescente de duração", "function": "sortByCrescDuration"},
-        { "title": "Ordem decrescente de duração", "function": "sortByDecresDuration"},
-        { "title": "Proximidade da data limite", "function": "sortByProxLimit", "optional": true} // não é para aparecer na tabela de "sem prazo limite"
-        // { "title": "Ordem decrescente de chegada??", "function": "sortByCrescente"},
+        { "title": "Ordem decrescente de duração", "function": "sortByDecresDuration"}
       ],
       dropdownFiltrarOptions: [ // títulos e funções a chamar para cada botão
 
@@ -99,7 +98,7 @@ export default {
       dropdownOrdenarVisible: false, // para gerir se dropdown é ou não visível
       dropdownFiltroVisible: false, // para gerir se dropdown é ou não visível
       filtroSelecionado: 0, // posição do elemento dentro da div do dropdown-cotent
-      ordenarSelecionado: 0,
+      ordenarSelecionado: this.comPrazo ? 0 : 1,
       servicesToPresent: []
     }
   },
@@ -163,6 +162,11 @@ export default {
 
   created() {
     this.servicesToPresent = this.services
+    if (this.comPrazo) {
+      this.sortByProxLimit()
+    } else {
+      this.sortArrival()
+    }
   }
 }
 

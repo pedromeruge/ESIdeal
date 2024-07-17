@@ -30,10 +30,11 @@
 
         data() {
             return {
-
                 user: userState(),
                 
                 servico: null,
+                
+                horaFim: "",
 
                 sortColumn: null,
                 sortOrder: null,
@@ -57,6 +58,24 @@
             checkUser() {
                 if (!this.user.userId) {
                     this.$router.push('/login');
+                }
+            },
+
+            calculateTime(dataFim) {
+                var monthNames = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho", "Julho", "Agosto", "Setembro", "Outubro","Novembro","Dezembro"]
+
+                const horaFim = dataFim.getHours().toString().padStart(2, '0');
+                const minutosFim = dataFim.getMinutes().toString().padStart(2, '0');
+                this.horaFim = `${horaFim}:${minutosFim}h`;
+
+                const currentTime = new Date();
+                const diffMinutes = Math.floor((dataFim - currentTime) / 60000);
+                const diffDays = Math.floor(diffMinutes / (60 * 24))
+
+                if (diffMinutes < 0 || diffDays > 0) {
+                    const diaFim = dataFim.getDate().toString().padStart(2,"0");
+                    const mesFim = monthNames[dataFim.getMonth()]
+                    this.horaFim = this.horaFim + " (" + diaFim + " " + mesFim + ")"
                 }
             },
 
@@ -318,6 +337,9 @@
         async created() {
             const dbData = serviceState();
             this.servico = await dbData.getServiceDetails(this.servicoID);
+            if (this.servico.agendamento === Consts.AgendamentoServico.PROGRAMADO) {
+                this.calculateTime(this.servico.data)
+            }
         },
     };
 
@@ -348,6 +370,8 @@
                 </div>
                 <div class="right">
                     <span class="estado">ESTADO: {{ estado }}</span>
+                    <span class="prazo" v-if="servico.agendamento === 2" :class="{'red-text': poucoTempo}">POR TERMINAR ÀS {{ horaFim }}</span>
+                    <span class="prazo" v-else>SEM PRAZO LIMITE</span>
                 </div>
             </div>
         </div>
@@ -549,9 +573,21 @@
     .right {
         display: flex;
         flex-direction: column;
-        justify-content: right;
+        align-items: end;
+        flex: 2.4;
         padding: 15px 50px 0px 0px
     }
+
+    .prazo {
+        display: flex;
+        flex:1;
+        font-size: 1.1em;
+        font-weight: 400;
+        color: var(--text-darker-grey);
+        margin-top: auto;
+        padding-bottom: 20px;
+        align-items: flex-end;
+   }
 
     .estado {
         font-size: 1.56em;
@@ -807,6 +843,10 @@
         background-color: black; 
         margin: 1em 0;
     }
+
+    .red-text{
+        color: var(--color-red);
+   }
 
     @media (max-width: 700px) {
 
